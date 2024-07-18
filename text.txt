@@ -1,0 +1,98 @@
+  async getData() {
+            for (let key in this.products) {
+                if (key === this.routerId) {
+                    this.item = (this.products[key]);
+                }
+            }
+
+        },
+        signinUser() {
+            this.$router.push({ name: 'LoginPage' })
+             },
+        gotoGamePage() {
+            this.addToLocalStorageNewItem(this.item.title, this.item);
+            this.ifAddGame = true ;
+            this.recordGames();
+            // this.$router.push({ name: 'GamePage' })
+        },
+        // get the keyName and value and  then setitem in localstorage 
+        addToLocalStorageNewItem(name, value) {
+            // Get the existing data
+            localStorage.removeItem(name);
+            this.games.push(value);
+            // Save back to localStorage
+            localStorage.setItem(name, JSON.stringify(this.games));
+
+        },
+
+        getDataStore() {
+            this.keys = Object.keys(localStorage);
+              var  i = this.keys.length;
+            while (i--) {
+                this.values.push(localStorage.getItem(this.keys[i]));
+            }
+        },
+          getdataStorage(){
+            if(this.user){
+             const dataOnLine = query(collection(projectFirestore, `users/${this.user.uid}/games`), where("userId", "==", this.user.uid));
+             onSnapshot(dataOnLine, (querySnapshot) => {
+               this.games = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+               
+            })
+        }
+    },
+        async recordGames() {
+            if (this.user.uid) {
+                await addDoc(collection(projectFirestore, `users/${this.user.uid}/games`), {
+                    userId: this.user.uid,
+                    title:this.item.title,
+                    cardId:this.item.id,
+                    games: this.games,
+                    timestamp: new Date()
+                }).then(function () {
+                    alert("Game recorder");
+                });
+            } else {
+                alert("You need to log in first!");
+            }
+        }
+    },
+    mounted() {
+        // this.getDataStore();
+        //this.getdataStorage();
+         this.getData();
+        // console.log(this.user.uid)
+      },
+    watch: {
+        games: {
+            handler(newGames) {
+                localStorage.games = JSON.stringify(newGames);
+            }
+        },
+        deep: true
+    }
+
+
+    <!-- <v-card class="mx-4 my-4" dark color="grey-lighten-4"  elevation="5" outlined shaped tile  >
+                <v-card-item>
+                    <template v-slot:title>
+                        {{ game.title }}
+                    </template>
+                    <template v-slot:text>
+                        <p>{{ game.explanation }}</p>
+                        <p>{{ game.mission }}</p>
+                    </template>
+                    <v-expansion-panels v-for="(quiz, index) in game.quiz" :key="index" >
+                        <v-expansion-panel :title="quiz.question" :text="quiz.content" class="mt-4 px-5 py-4" game="foo">
+                            <v-radio-group v-model="answers[index]" column>
+                                <v-radio v-for="choice in quiz.choices" :key="choice" :label="choice"
+                                    :value="choice">
+                                </v-radio>
+                            </v-radio-group>                            
+                    </v-expansion-panel>                        
+                        <v-btn @click="submitQuiz" color="green" class="mt-5">Envoyer</v-btn>
+                    </v-expansion-panels> 
+                   
+                </v-card-item>
+
+            </v-card> -->

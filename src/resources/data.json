@@ -1,0 +1,135 @@
+[
+    {
+     "id":0,
+    "copyright": "Mauricode Academy 2024",
+    "date": "29-06-2024",
+    "explanation": "Jeu de piste coopératif. Il se déroule en plein air et se joue en équipe. Il nécessite l'utilisation d'un smartphone pour suivre les indices, répondre aux énigmes",
+    "mission" : "Retrouvez les drapeaux de la Réunion et répondez aux questions sur l’histoire de la Réunion depuis sa découverte à aujourd’hui !",
+    "quiz": [
+    {
+      "question": "Quelle est la capitale de la France ?",
+      "choices": ["Paris", "Lyon", "Marseille", "Nice"],
+      "correctAnswer": "Paris"
+    },
+    {
+      "question": "Qui a peint la Joconde ?",
+      "choices": ["Vincent van Gogh", "Pablo Picasso", "Claude Monet", "Léonard de Vinci"],
+      "correctAnswer": "Léonard de Vinci"
+    },
+    {
+      "question": "Quelle est la plus grande planète du système solaire ?",
+      "choices": ["Terre", "Mars", "Jupiter", "Saturne"],
+      "correctAnswer": "Jupiter"
+    }
+  ],
+    "hdurl": "https://apod.nasa.gov/apod/image/2102/LunarHalo_Strand_1500.jpg",
+    "media_type": "image",
+    "service_version": "v1",
+    "title": "Lieux historiques",
+    "url": "https://apod.nasa.gov/apod/image/2102/LunarHalo_Strand_960.jpg"
+    },
+    {
+        "id":1,
+    "copyright": "\nFrank Kuszaj\n",
+    "date": "2021-02-02",
+    "explanation": "Meteors can be colorful. While the human eye usually cannot discern many colors, cameras often can. Pictured is a Quadrantids meteor captured by camera over Missouri, USA, early this month that was not only impressively bright, but colorful. The radiant grit, likely cast off by asteroid 2003 EH1, blazed a path across Earth's atmosphere.  Colors in meteors usually originate from ionized elements released as the meteor disintegrates, with blue-green typically originating from magnesium, calcium radiating violet, and nickel glowing green. Red, however, typically originates from energized nitrogen and oxygen in the Earth's atmosphere.  This bright meteoric fireball was gone in a flash -- less than a second -- but it left a wind-blown ionization trail that remained visible for several minutes.   APOD is available via Facebook: in English, Catalan and Portuguese",
+    "quiz": [
+    {
+      "question": "En quelle année auront lieu les Jeux Olympiques de Paris 2024 ?",
+      "choices": ["2023", "2024", "2025", "2026"],
+      "correctAnswer": "2024"
+    },
+    {
+      "question": "Combien de disciplines seront présentes aux Jeux Olympiques de Paris 2024 ?",
+      "choices": ["28", "32", "35", "40"],
+      "correctAnswer": "32"
+    },
+    {
+      "question": "Quel est le slogan officiel des Jeux Olympiques de Paris 2024 ?",
+      "choices": ["Ensemble pour un monde meilleur", "La victoire en héritage", "L'esprit olympique", "Faster, Higher, Stronger – Together"],
+      "correctAnswer": "Faster, Higher, Stronger – Together"
+    }
+    
+      ],
+    "media_type": "image",
+    "service_version": "v1",
+    "title": "A Colorful Quadrantid Meteor",
+    "url": "https://apod.nasa.gov/apod/image/2102/MeteorStreak_Kuszaj_1080.jpg"
+    },
+    {
+        "id":2,
+    "date": "2021-02-03",
+    "explanation": "Was the oldest known rock on Earth found on the Moon? Quite possibly.  The story opens with the Apollo 14 lunar mission. Lunar sample 14321, a large rock found in Cone crater by astronaut Alan Shepard, when analyzed back on Earth, was found to have a fragment that was a much better match to Earth rocks than other Moon rocks.  Even more surprising, that rock section has recently been dated back 4 billion years, making it older, to within measurement uncertainty, than any rock ever found on Earth.  A leading hypothesis now holds that an ancient comet or asteroid impact launched Earth rocks into the Solar System, some of which fell back to the Moon, became mixed with heated lunar soil and other rocks, cooled, and re-fragmented.  The video features an internal X-ray scan of 14321 showing multiple sections with markedly different chemistries. Moon rocks will continue to be studied to learn a more complete history of the Moon, the Earth, and the early Solar System.  Friday marks the 50th Anniversary of the Apollo 14 landing on the Moon.",
+    "media_type": "video",
+    "service_version": "v1",
+    "title": "Found on the Moon: Candidate for Oldest Known Earth Rock",
+    "url": "https://www.youtube.com/embed/V0UBZh6Hf-s?rel=0",
+    "quiz": [
+      {
+        "question": "En quelle année auront lieu les Jeux Olympiques de Paris 2024 ?",
+        "choices": ["2023", "2024", "2025", "2026"],
+        "correctAnswer": "2024"
+      },
+      {
+        "question": "Combien de disciplines seront présentes aux Jeux Olympiques de Paris 2024 ?",
+        "choices": ["28", "32", "35", "40"],
+        "correctAnswer": "32"
+      },
+      {
+        "question": "Quel est le slogan officiel des Jeux Olympiques de Paris 2024 ?",
+        "choices": ["Ensemble pour un monde meilleur", "La victoire en héritage", "L'esprit olympique", "Faster, Higher, Stronger – Together"],
+        "correctAnswer": "Faster, Higher, Stronger – Together"
+      }
+      
+        ]
+    },
+    {
+        "id":3,
+    "date": "2021-02-04",
+    "explanation": "Fifty years ago this Friday, Apollo 14's Lunar Module Antares landed on the Moon. Toward the end of the stay astronaut Ed Mitchell snapped a series of photos of the lunar surface while looking out a window, assembled into this detailed mosaic by Apollo Lunar Surface Journal editor Eric Jones. The view looks across the Fra Mauro highlands to the northwest of the landing site after the Apollo 14 astronauts had completed their second and final walk on the Moon. Prominent in the foreground is their Modular Equipment Transporter, a two-wheeled, rickshaw-like device used to carry tools and samples. Near the horizon at top center is a 1.5 meter wide boulder dubbed Turtle rock. In the shallow crater below Turtle rock is the long white handle of a sampling instrument, thrown there javelin-style by Mitchell. Mitchell's fellow moonwalker and first American in space, Alan Shepard, also used a makeshift six iron to hit two golf balls. One of Shepard's golf balls is just visible as a white spot below Mitchell's javelin.",
+    "hdurl": "https://apod.nasa.gov/apod/image/2102/a14pan9335-43emj.jpg", 
+    "media_type": "image",
+    "service_version": "v1",
+    "title": "Apollo 14: A View from Antares",
+    "url": "https://apod.nasa.gov/apod/image/2102/a14pan9335-43emj_900.jpg",
+     "quiz": [
+      {
+        "question": "En quelle année auront lieu les Jeux Olympiques de Paris 2024 ?",
+        "choices": ["2023", "2024", "2025", "2026"],
+        "correctAnswer": "2024"
+      },
+      {
+        "question": "Combien de disciplines seront présentes aux Jeux Olympiques de Paris 2024 ?",
+        "choices": ["28", "32", "35", "40"],
+        "correctAnswer": "32"
+      },
+      {
+        "question": "Quel est le slogan officiel des Jeux Olympiques de Paris 2024 ?",
+        "choices": ["Ensemble pour un monde meilleur", "La victoire en héritage", "L'esprit olympique", "Faster, Higher, Stronger – Together"],
+        "correctAnswer": "Faster, Higher, Stronger – Together"
+      }
+      
+        ]
+    },
+    {
+        "id":4,
+    "date": "2021-02-05",
+    "explanation": "Fifty years ago this Sunday (February 7, 1971), the crew of Apollo 14 left lunar orbit and headed for home. They watched this Earthrise from their command module Kitty Hawk. With Earth's sunlit crescent just peeking over the lunar horizon, the cratered terrain in the foreground is along the lunar farside. Of course, while orbiting the Moon, the crew could watch Earth rise and set, but from the lunar surface the Earth hung stationary in the sky over their landing site at Fra Mauro Base. Rock samples returned from Fra Mauro included a 20 pound rock nicknamed Big Bertha, determined to contain a likely fragment of a meteorite from planet Earth. Kept on board the Kitty Hawk during the Apollo 14 mission was a cannister of 400-500 seeds that were later grown into Moon Trees.",
+    "hdurl": "https://apod.nasa.gov/apod/image/2102/AS14-71-9845v2wmktwtr4Jerry.jpg",
+    "media_type": "image",
+    "service_version": "v1",
+    "title": "Apollo 14 Heads for Home",
+    "url": "https://apod.nasa.gov/apod/image/2102/AS14-71-9845v2wmktwtr4Jerry.jpg"
+    },
+    {
+        "id":5,
+    "copyright": "Lukasz Zak",
+    "date": "2021-02-06",
+    "explanation": "Snow blankets the ground in this serene forest and sky view. Assembled in a 360 degree panoramic projection, the mosaicked frames were captured at January's end along a quiet country road near Siemiony, northeastern Poland, planet Earth. The night was cold and between trees reaching toward the sky shine the stars and nebulae of the northern winter Milky Way. Near zenith is bright star Capella, a mere 43 light-years above the tree tops. Alpha star of the constellation Auriga the Charioteer and part of the winter hexagon asterism, Capella is a well-studied double star system. Follow the Milky Way above and right of Capella and you might spot the familiar stars of Orion in the northern winter night.",
+    "hdurl": "https://apod.nasa.gov/apod/image/2102/Siemiony_las_31_01_2021_2048.jpg",
+    "media_type": "image",
+    "service_version": "v1",
+    "title": "A Northern Winter Night",
+    "url": "https://apod.nasa.gov/apod/image/2102/Siemiony_las_31_01_2021_1024.jpg"
+    }
+]
