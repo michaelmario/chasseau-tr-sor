@@ -7,8 +7,11 @@ import { createVuetify} from 'vuetify'
 
 // Styles
 import 'vuetify/styles'
+import { fa } from "vuetify/iconsets/fa";
+    import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 import '@mdi/font/css/materialdesignicons.css'
-
+import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
+import "@fortawesome/fontawesome-free/css/all.css";
 const vuetify = createVuetify({
     components,
     directives,
@@ -43,6 +46,14 @@ const vuetify = createVuetify({
                       info: '#4496F3',
                       success: '#16DB93',
                       warning: '#CB8C00',
+                  },
+                  icons: {
+                    defaultSet: "mdi",
+                    aliases,
+                    sets: {
+                      mdi,
+                      fa,
+                    },
                   },
         },
     },

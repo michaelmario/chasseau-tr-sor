@@ -5,6 +5,7 @@ import vuetify from "./plugins/vuetify.js";
 import { projectAuth } from './firebase/config'
 // import { store } from './store/store'
 
+
 let app 
 projectAuth.onAuthStateChanged(() => {
     if (!app) {

@@ -21,8 +21,7 @@
             <div class="wrapper">
                 <iframe loading="lazy" src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGJfo_qSDQ&#x2F;oK64JkCPVc3eKJ2OxiLrdA&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
                 
-            </div> 
-            
+            </div>           
           
         </v-container>
         

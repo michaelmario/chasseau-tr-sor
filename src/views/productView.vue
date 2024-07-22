@@ -4,19 +4,17 @@
             <v-col>
             <router-link to="/">
                 <v-icon color="white-darken-2" icon="mdi-arrow-left" size="large"></v-icon>
-                    <span class="font-weight-light ml-2">Accueil                    
-                    </span>
+                    <span class="font-weight-light ml-2">Accueil </span>
             </router-link>
             </v-col>
            </v-row>
            <v-row>
-            <v-col v-for="n in products" :key="n" cols="12"  sm="4">
+            <v-col v-for="(n,index) in products" :key="index" cols="12"  sm="4">
                 <TreasureCard 
                 :image ="`${n.url}`"
-                :date = "`${n.date}`"
                 :cardTitle="`${n.title}`"
                 :explanation ="`${n.explanation}`"
-                :id ="`${n.id}`"
+                :id ="n.id"
                 />
             </v-col>
           </v-row>
@@ -38,7 +36,7 @@ export default {
         TreasureCard
     },
     created(){
-        console.log(products);
+       this.products;
     }
     // created() {  photos: [],
     //     fetch(API_URL)

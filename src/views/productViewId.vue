@@ -3,8 +3,8 @@
         <v-row>
             <v-col>
                 <router-link to="/productView/">
-                    <v-icon color="white-darken-2" icon="mdi-arrow-left" size="large"></v-icon>
-                    <span class="font-weight-light ml-2"> Les jeux
+                    <v-icon color="white-darken-2" class="mr-1" icon="mdi-arrow-left" size="large"></v-icon>
+                     <span class="font-weight-light ml-2"> Les jeux
                     </span>
                 </router-link>
             </v-col>
@@ -13,8 +13,9 @@
                 <div class="gotoView" v-if="user">
                     <router-link to="/gamePage">
                         <v-btn class="font-weight-light">User play
-                            <v-icon color="white-darken-2" icon="mdi-arrow-right" size="large"></v-icon>
+                            <!-- <v-icon " icon="" "></v-icon> -->
                         </v-btn>
+                        <v-icon color="white-darken-2" class="mr-1" size="large" icon="mdi-arrow-right"></v-icon>
                     </router-link>
                 </div>
                 <div class="gotoView" v-else>
@@ -37,7 +38,7 @@
                     </div>
                     <div v-if="user">
                         <v-btn @click="gotoGamePage" :class="{ invisible: !value2 }">Add To Play</v-btn>
-                        <v-card v-if="ifAddGame">
+                        <!-- <v-card v-if="ifAddGame">
                             <h3>jeux</h3>
                             <div>
                                 <v-card v-for="(item, index) in newData" :key="index" class="mb-4">
@@ -50,9 +51,13 @@
                                     </v-card-text>
                                 </v-card>
 
-                                <v-btn @click="submitQuiz" :class="{ invisible: !value2 }" color="green" class="mt-5">Envoyer</v-btn>
+                                <v-btn @click="submitQuiz" color="green" class="mt-5">Envoyer</v-btn>
                             </div>
                             
+                        </v-card> -->
+                        <v-card v-if="showCard">
+                            <v-card-title>Game Card</v-card-title>
+                            <v-card-text>This is a game card that is displayed conditionally.</v-card-text>
                         </v-card>
                     </div>
                     <div v-else>
@@ -72,7 +77,7 @@
 import products from "@/resources/data.json";
 import { ref } from 'vue'
 import { projectAuth, projectFirestore } from '@/firebase/config'
-import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, query, where,onSnapshot } from "firebase/firestore";
 // import DisplayGames from "@/components/NewGameDisplay.vue"
 
 
@@ -98,7 +103,11 @@ export default {
             data: [],
             newData: {},
             displayCard: true,
-            sumid: 0
+            sumid: 0,
+            // gameId: , // Remplacez par l'ID du jeu
+            cardId: this.$route.params.id , // Remplacez par l'ID de la carte
+            showCard: true,
+            elementData:{}  
 
         }
     },
@@ -106,6 +115,43 @@ export default {
         // DisplayGames
     },
     methods: {
+        async checkGameAndCard() {   
+            const gamesRef = collection(projectFirestore, `users/${this.user.uid}/games`);  
+            const q = query(gamesRef, where("userId", "==", this.user.uid));  
+             
+            onSnapshot(q, (querySnapshot) => {
+              this.elementData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+              this.elementData.forEach((element) => {                 
+                Object.entries(element) // Array(2) [["a", "something"], ["b", 42]]
+                .forEach(([key, value]) => {                    
+                  if(key === "cardId" && value === this.cardId){
+                    console.log(`${key}: ${value}`)
+                  }
+                })
+                  
+              })
+              
+            //   
+            })
+    //   try {
+    //        const gameDocRef =  query(collection(, `users/${this.user.uid}/games`),where()); 
+    //        const gameDoc = await getDocs(gameDocRef);
+    //     if (gameDoc.exists()) {
+    //       const gameData = gameDoc.data();
+    //       if (gameData.cardId && gameData.cardId.includes(this.cardId)) {
+    //         this.showCard = false;
+    //         console.log('Card exists, hiding the card.');
+    //       } else {
+    //         console.log('Card does not exist, showing the card.');
+    //       }
+    //     } else {
+    //       console.log('Game does not exist.');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error checking game and card: ', error);
+    //   }
+    },
+
         async getData() {
             for (let key in this.products) {
                 if (key === this.routerId) {
@@ -120,19 +166,18 @@ export default {
                 onSnapshot(dataOnLine, (querySnapshot) => {
                     this.games = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     this.games.forEach((element) => {
-                        if (this.routerId == element.cardId) {
+                       if (this.routerId === element.cardId) {
                             this.value2 = false;
-                            this.answers = element.answers;
                             this.newData = element.games.quiz;
-                            if (this.answers === false) {
-                                this.ifAddGame = true;
-                            } else {
-                                this.ifAddGame = false;
-
-                            }
-
+                        } else if (element.answers === false) {
+                            this.ifAddGame = true;
+                        } else {
+                            this.ifAddGame = false;
 
                         }
+
+
+
                     })
 
                 })
@@ -141,7 +186,7 @@ export default {
         gotoGamePage() {
             this.addToLocalStorageNewItem(this.item.title, this.item);
             this.recordGames();
-           },
+        },
 
         async recordGames() {
             if (this.user.uid) {
@@ -153,7 +198,7 @@ export default {
                     games: this.item,
                     timestamp: new Date()
                 }).then(function () {
-                    window.location.href='/gamePage';
+                    window.location.href = '/gamePage';
                     // alert("Game recorder");
                 });
             } else {
@@ -166,7 +211,7 @@ export default {
             localStorage.setItem(name, JSON.stringify(this.games));
             // this.games.push(value);
             // Save back to localStorage
-           
+
 
         },
         async submitQuiz() {
@@ -192,30 +237,31 @@ export default {
         },
 
         getPointsToDisplayCard() {
-            if(this.user){
-            const q = query(collection(projectFirestore, `users/${this.user.uid}/points`));
-            onSnapshot(q, (querySnapshot) => {
-                let arrayPoints = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                arrayPoints.forEach((el) => {
-                    this.sumid += el.points;
-                    this.values.push(el);
-                   
-                })
-            })
-        }else{
-             return this.sumid;
-        }
-    },
+            if (this.user) {
+                const q = query(collection(projectFirestore, `users/${this.user.uid}/points`));
+                onSnapshot(q, (querySnapshot) => {
+                    let arrayPoints = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    arrayPoints.forEach((el) => {
+                        this.sumid += el.points;
+                        this.values.push(el);
 
-    signinUser() {
+                    })
+                })
+            } else {
+                return this.sumid;
+            }
+        },
+
+        signinUser() {
             this.$router.push({ name: 'LoginPage' })
-             },
+        },
 
     },
     mounted() {
         // this.getDataStore();
-        this.getPointsToDisplayCard(),
-        this.getdataStorage();
+        this.checkGameAndCard();
+        this.getPointsToDisplayCard();
+            this.getdataStorage();
         this.getData();
 
     },
@@ -233,6 +279,6 @@ export default {
 }
 
 .invisible {
-    display:none;
+    display: none;
 }
 </style>

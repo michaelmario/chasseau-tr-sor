@@ -2,7 +2,7 @@
   <v-hover v-slot="{ isHovering, props }">
   <router-link :to="{name:`productView`, params:{id:id}}">    
     <v-card class="mx-2 my-4" dark color="grey-lighten-4" v-bind="props">
-      <v-img :aspect-ratio="16 / 9" :src="image" :alt="date" cover>
+      <v-img :aspect-ratio="16 / 9" :src="image" :alt="cardTitle" cover>
         <v-expand-transition>
           <div v-if="isHovering" class="d-flex transition-fast-in-fast-out bg-grey-darken-2 v-card--reveal text-p"
             style="height: 100%;">
@@ -29,7 +29,6 @@ export default {
     instructions: String,
     explanation: String,
     image: String,
-    date: Number,
     id: Number
   },
   data() {
