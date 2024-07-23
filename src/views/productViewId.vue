@@ -4,7 +4,7 @@
             <v-col>
                 <router-link to="/productView/">
                     <v-icon color="white-darken-2" class="mr-1" icon="mdi-arrow-left" size="large"></v-icon>
-                     <span class="font-weight-light ml-2"> Les jeux
+                    <span class="font-weight-light ml-2"> Les jeux
                     </span>
                 </router-link>
             </v-col>
@@ -38,26 +38,20 @@
                     </div>
                     <div v-if="user">
                         <v-btn @click="gotoGamePage" :class="{ invisible: !value2 }">Add To Play</v-btn>
-                        <!-- <v-card v-if="ifAddGame">
-                            <h3>jeux</h3>
-                            <div>
-                                <v-card v-for="(item, index) in newData" :key="index" class="mb-4">
-                                    <v-card-title>{{ item.question }}</v-card-title>
-                                    <v-card-text>
-                                        <v-radio-group v-model="data[index]" column>
-                                            <v-radio v-for="choice in item.choices" :key="choice" :label="choice"
-                                                :value="choice"></v-radio>
-                                        </v-radio-group>
-                                    </v-card-text>
-                                </v-card>
-
-                                <v-btn @click="submitQuiz" color="green" class="mt-5">Envoyer</v-btn>
-                            </div>
-                            
-                        </v-card> -->
                         <v-card v-if="showCard">
-                            <v-card-title>Game Card</v-card-title>
-                            <v-card-text>This is a game card that is displayed conditionally.</v-card-text>
+                            <h3>jeux</h3>
+
+                            <v-card v-for="(item, index) in newData" :key="index" class="mb-4">
+                                <v-card-title>{{ item.question }}</v-card-title>
+                                <v-card-text>
+                                    <v-radio-group v-model="data[index]" column>
+                                        <v-radio v-for="choice in item.choices" :key="choice" :label="choice"
+                                            :value="choice"></v-radio>
+                                    </v-radio-group>
+                                </v-card-text>
+                            </v-card>
+
+                            <v-btn @click="submitQuiz" color="green" class="mt-5">Envoyer</v-btn>
                         </v-card>
                     </div>
                     <div v-else>
@@ -77,7 +71,8 @@
 import products from "@/resources/data.json";
 import { ref } from 'vue'
 import { projectAuth, projectFirestore } from '@/firebase/config'
-import { collection, addDoc, query, where,onSnapshot } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
+
 // import DisplayGames from "@/components/NewGameDisplay.vue"
 
 
@@ -104,10 +99,10 @@ export default {
             newData: {},
             displayCard: true,
             sumid: 0,
-            // gameId: , // Remplacez par l'ID du jeu
-            cardId: this.$route.params.id , // Remplacez par l'ID de la carte
+            cardId: this.$route.params.id, // Remplacez par l'ID de la carte
             showCard: true,
-            elementData:{}  
+            elementData: {},
+            arrayData: []
 
         }
     },
@@ -115,42 +110,21 @@ export default {
         // DisplayGames
     },
     methods: {
-        async checkGameAndCard() {   
-            const gamesRef = collection(projectFirestore, `users/${this.user.uid}/games`);  
-            const q = query(gamesRef, where("userId", "==", this.user.uid));  
-             
+        async checkGameAndCard() {
+            const q = query(collection(projectFirestore, `users/${this.user.uid}/games`));
             onSnapshot(q, (querySnapshot) => {
-              this.elementData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
-              this.elementData.forEach((element) => {                 
-                Object.entries(element) // Array(2) [["a", "something"], ["b", 42]]
-                .forEach(([key, value]) => {                    
-                  if(key === "cardId" && value === this.cardId){
-                    console.log(`${key}: ${value}`)
-                  }
+                let gamesOnline = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                gamesOnline.forEach((el) => {
+                    let cardident = el.cardId;
+                    if (cardident == this.cardId) {
+                        this.newData = el.games.quiz;
+                         console.log(this.newData)
+                        this.value2 = false;
+                        }
                 })
-                  
-              })
-              
-            //   
-            })
-    //   try {
-    //        const gameDocRef =  query(collection(, `users/${this.user.uid}/games`),where()); 
-    //        const gameDoc = await getDocs(gameDocRef);
-    //     if (gameDoc.exists()) {
-    //       const gameData = gameDoc.data();
-    //       if (gameData.cardId && gameData.cardId.includes(this.cardId)) {
-    //         this.showCard = false;
-    //         console.log('Card exists, hiding the card.');
-    //       } else {
-    //         console.log('Card does not exist, showing the card.');
-    //       }
-    //     } else {
-    //       console.log('Game does not exist.');
-    //     }
-    //   } catch (error) {
-    //     console.error('Error checking game and card: ', error);
-    //   }
-    },
+            });
+
+        },
 
         async getData() {
             for (let key in this.products) {
@@ -160,29 +134,29 @@ export default {
             }
 
         },
-        getdataStorage() {
-            if (this.user) {
-                const dataOnLine = query(collection(projectFirestore, `users/${this.user.uid}/games`), where("userId", "==", this.user.uid));
-                onSnapshot(dataOnLine, (querySnapshot) => {
-                    this.games = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                    this.games.forEach((element) => {
-                       if (this.routerId === element.cardId) {
-                            this.value2 = false;
-                            this.newData = element.games.quiz;
-                        } else if (element.answers === false) {
-                            this.ifAddGame = true;
-                        } else {
-                            this.ifAddGame = false;
+        // getdataStorage() {
+        //     if (this.user) {
+        //         const dataOnLine = query(collection(projectFirestore, `users/${this.user.uid}/games`), where("userId", "==", this.user.uid));
+        //         onSnapshot(dataOnLine, (querySnapshot) => {
+        //             this.games = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        //             this.games.forEach((element) => {
+        //                 if (this.routerId === element.cardId) {
+        //                     // this.value2 = false;
+        //                     this.newData = element.games.quiz;
+        //                 // } else if (element.answers === false) {
+        //                 //     this.ifAddGame = true;
+        //                 // } else {
+        //                 //     this.ifAddGame = false;
 
-                        }
+        //                  }
 
 
 
-                    })
+        //             })
 
-                })
-            }
-        },
+        //         })
+        //     }
+        // },
         gotoGamePage() {
             this.addToLocalStorageNewItem(this.item.title, this.item);
             this.recordGames();
@@ -261,7 +235,7 @@ export default {
         // this.getDataStore();
         this.checkGameAndCard();
         this.getPointsToDisplayCard();
-            this.getdataStorage();
+        // this.getdataStorage();
         this.getData();
 
     },

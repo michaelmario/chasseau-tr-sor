@@ -73,26 +73,36 @@
     }
 
 
-    <!-- <v-card class="mx-4 my-4" dark color="grey-lighten-4"  elevation="5" outlined shaped tile  >
-                <v-card-item>
-                    <template v-slot:title>
-                        {{ game.title }}
-                    </template>
-                    <template v-slot:text>
-                        <p>{{ game.explanation }}</p>
-                        <p>{{ game.mission }}</p>
-                    </template>
-                    <v-expansion-panels v-for="(quiz, index) in game.quiz" :key="index" >
-                        <v-expansion-panel :title="quiz.question" :text="quiz.content" class="mt-4 px-5 py-4" game="foo">
-                            <v-radio-group v-model="answers[index]" column>
-                                <v-radio v-for="choice in quiz.choices" :key="choice" :label="choice"
-                                    :value="choice">
-                                </v-radio>
-                            </v-radio-group>                            
-                    </v-expansion-panel>                        
-                        <v-btn @click="submitQuiz" color="green" class="mt-5">Envoyer</v-btn>
-                    </v-expansion-panels> 
-                   
-                </v-card-item>
-
-            </v-card> -->
+    // const  = collection(, `users/${this.user.uid}/games`);
+            const gamesRef = doc(projectFirestore, 'users', this.user.uid, 'games', this.cardId).get();
+              
+             const q = query(gamesRef);  
+             console.log(q)
+            // onSnapshot(gamesRef, (querySnapshot) => {
+            //   this.elementData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+            //   this.elementData.forEach((element) => {                 
+            //     Object.entries(element).forEach((value) => {                    
+                 
+            //      console.log(value)
+            //      })                  
+            //   })
+              
+            //   
+            // })
+    //   try {
+    //        const gameDocRef =  query(collection(, `users/${this.user.uid}/games`),where()); 
+    //        const gameDoc = await getDocs(gameDocRef);
+    //     if (gameDoc.exists()) {
+    //       const gameData = gameDoc.data();
+    //       if (gameData.cardId && gameData.cardId.includes(this.cardId)) {
+    //         this.showCard = false;
+    //         console.log('Card exists, hiding the card.');
+    //       } else {
+    //         console.log('Card does not exist, showing the card.');
+    //       }
+    //     } else {
+    //       console.log('Game does not exist.');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error checking game and card: ', error);
+    //   }
